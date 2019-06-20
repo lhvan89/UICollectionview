@@ -42,9 +42,9 @@ class ViewController: UIViewController {
         Item(title: "Viber", image: "viber", badge: 23),
         Item(title: "Vimeo", image: "vimeo", badge: 24),
         Item(title: "Vine", image: "vine", badge: 25),
-//        Item(title: "Whatsapp", image: "whatsapp", badge: 26),
-//        Item(title: "Yelp", image: "yelp", badge: 27),
-//        Item(title: "Youtube", image: "youtube", badge: 28),
+        Item(title: "Whatsapp", image: "whatsapp", badge: 26),
+        Item(title: "Yelp", image: "yelp", badge: 27),
+        Item(title: "Youtube", image: "youtube", badge: 28),
     ]
 
     override func viewDidLoad() {
@@ -98,4 +98,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
 }
+
+
