@@ -20,6 +20,14 @@ class itemCollectionViewCell: UICollectionViewCell {
     }
     
     func loadData(item: Item){
+        
+        // hide item if data is empty
+        if item.title == "" {
+            self.isHidden = true
+            return
+        } else {
+            self.isHidden = false
+        }
         iconImage.image = UIImage(named: item.image)
         titleLabel.text = item.title
         badgeButton.setTitle(String(item.badge), for: .normal)
