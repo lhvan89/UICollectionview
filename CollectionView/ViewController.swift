@@ -13,8 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var itemsCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    private let numberOfItemPerpage = 15
+    private let numberOfItemPerPage = 15
     private var numberOfPage = 0
+    private let numberOfRowInPerPage = 5
+    private let numberOfColInPerPage = 3
     
     var listItems: [Item] = [
         Item(title: "Behance", image: "behance", badge: 0),
@@ -52,10 +54,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        numberOfPage = listItems.count/numberOfItemPerpage + (listItems.count % numberOfItemPerpage == 0 ? 0 : 1)
+        numberOfPage = listItems.count/numberOfItemPerPage + (listItems.count % numberOfItemPerPage == 0 ? 0 : 1)
         pageControl.numberOfPages = numberOfPage
 
-        listItems = sortItems(numberOfPage: numberOfPage, numberOfItemPerpage: numberOfItemPerpage, listItems: listItems)
+        listItems = sortItems(numberOfPage: numberOfPage, numberOfItemPerpage: numberOfItemPerPage, listItems: listItems)
         
         itemsCollectionView.dataSource = self
         itemsCollectionView.delegate = self
@@ -71,20 +73,19 @@ class ViewController: UIViewController {
         
         // init allItems with empty data
         var allItems: [Item] = []
-        for _ in 0..<numberOfPage {
-            for _ in 0..<numberOfItemPerpage {
-                allItems.append(Item(title: "", image: "", badge: 0))
-            }
+        
+        for _ in 0..<numberOfPage*numberOfItemPerpage {
+            allItems.append(Item(title: "", image: "", badge: 0))
         }
 
-        // merge items
+        // merge array items
         for i in 0..<listItems.count {
             allItems[i] = listItems[i]
         }
         
         // rearrange items in per page
         for _ in 0..<numberOfPage {
-            result.append(contentsOf: arrangeItems(row: 3, col: 5, data: allItems))
+            result.append(contentsOf: arrangeItems(row: numberOfColInPerPage, col: numberOfRowInPerPage, data: allItems))
             for _ in 0..<numberOfItemPerpage {
                 allItems.removeFirst()
             }
@@ -142,5 +143,3 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlow
     }
     
 }
-
-
